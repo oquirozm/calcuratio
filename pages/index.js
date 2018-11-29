@@ -1,6 +1,12 @@
 import ButtonGroup from "../components/ButtonGroup";
 import InputForm from "../components/InputForm";
 import helpers from "../helpers";
+import "../styles/global.css";
+
+let brandStyleVariables = {
+  gray: "#F0F0F0",
+};
+
 const { toFixed } = helpers;
 
 const adjustDecimals = ratio => {
@@ -95,6 +101,12 @@ class Main extends React.Component {
   render() {
     return (
       <div>
+        <header id="header">
+          <h1 className="title">calcuratio</h1>
+          <p className="made-by">
+            made with ♡ by <a>omar</a>
+          </p>
+        </header>
         <div className="title_area">
           <h1>Aspect Ratio Calculator</h1>
         </div>
@@ -116,6 +128,23 @@ class Main extends React.Component {
           <p>{this.state.calculation}</p>
         </div>
         <style jsx>{`
+          #header {
+            border-top: 15px solid ${brandStyleVariables.gray};
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+          }
+          #header h1 {
+            font-family: "Jost* 400 Book", sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+          }
+
+          #header .made-by {
+            font-family: "Jost* 300", sans-serif;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+          }
           .title_area h1 {
             text-align: center;
           }
