@@ -14,17 +14,17 @@ class ButtonGroup extends React.Component {
       buttons: [
         {
           id: "get_width",
-          label: "Calculate Width",
+          label: "get width",
           active: this.props.mode == "get_width",
         },
         {
           id: "get_height",
-          label: "Calculate Height",
+          label: "get height",
           active: this.props.mode == "get_height",
         },
         {
           id: "get_aspect_ratio",
-          label: "Calculate Aspect Ratio",
+          label: "get aspect ratio",
           active: this.props.mode == "get_aspect_ratio",
         },
       ],
@@ -73,39 +73,53 @@ class ButtonGroup extends React.Component {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            align-content: center;
+            align-items: center;
+          }
+          @media (min-width: 1200px) {
+            .button_group {
+              width: 500px;
+            }
+          }
+          @media (min-width: 600px) and (max-width: 1199px) {
+            .button_group {
+              width: 70%;
+            }
+          }
+          @media (max-width: 599px) {
+            .button_group {
+              width: 100%;
+              flex-direction: column;
+            }
           }
           button {
             display: block;
-            width: 200px;
+            width: 160px;
+            margin: 0 20px;
+            padding: 10px;
             height: auto;
             border: none;
             font-size: 20px;
-            background-color: ${cssVars.backgroundColor};
-            border-right: ${cssVars.borderRadius} solid #000;
-            border-top: ${cssVars.borderRadius} solid #000;
-            border-bottom: ${cssVars.borderRadius} solid #000;
             cursor: pointer;
+            font-family: "Jost* 300", sans-serif;
+            background-color: #fff;
+          }
+          @media (max-width: 599px) {
+            button {
+              margin: 10px 0;
+            }
           }
           button.active {
-            background-color: ${cssVars.hoverBackgroundColor};
+            font-family: "Jost* 600 Semi", sans-serif;
+            border-bottom: ${cssVars.borderRadius} solid #000;
           }
           button:hover,
-          button:active {
-            background-color: ${cssVars.hoverBackgroundColor};
+          button:active,
+          button.active {
+            font-family: "Jost* 600 Semi", sans-serif;
           }
           button:focus,
           button:active {
             outline: none;
-          }
-          button:first-of-type {
-            border-left: ${cssVars.borderRadius} solid #000;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-          }
-          button:last-of-type {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
           }
         `}</style>
       </div>

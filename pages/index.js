@@ -1,5 +1,6 @@
 import ButtonGroup from "../components/ButtonGroup";
 import InputForm from "../components/InputForm";
+import Head from "next/head";
 import helpers from "../helpers";
 import "../styles/global.css";
 
@@ -101,15 +102,20 @@ class Main extends React.Component {
   render() {
     return (
       <div>
+        <Head>
+          <title>Calcuratio</title>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
         <header id="header">
           <h1 className="title">calcuratio</h1>
           <p className="made-by">
             made with ♡ by <a>omar</a>
           </p>
         </header>
-        <div className="title_area">
-          <h1>Aspect Ratio Calculator</h1>
-        </div>
         <ButtonGroup
           handleModeChange={this.handleModeChange}
           mode={this.state.mode}
@@ -120,28 +126,34 @@ class Main extends React.Component {
             updateValueHandler={this.updateValue}
           />
           <button className="calculate" onClick={this.calculate}>
-            Calculate
+            calculate
           </button>
         </div>
         <div className="result_area">
           <h3>Result</h3>
-          <p>{this.state.calculation}</p>
+          {/* <p>{this.state.calculation}</p> */}
+          <p>400</p>
         </div>
         <style jsx>{`
           #header {
-            border-top: 15px solid ${brandStyleVariables.gray};
             display: flex;
             justify-content: space-between;
             padding: 20px;
+            margin-bottom: 50px;
+          }
+          @media (max-width: 599px) {
+            #header {
+              margin-bottom: 10px;
+            }
           }
           #header h1 {
             font-family: "Jost* 400 Book", sans-serif;
             font-size: 18px;
             letter-spacing: 0.5px;
+            border-bottom: 2px solid black;
           }
-
           #header .made-by {
-            font-family: "Jost* 300", sans-serif;
+            font-family: "Jost* 600 Semi", sans-serif;
             font-size: 15px;
             letter-spacing: 0.5px;
           }
@@ -154,9 +166,23 @@ class Main extends React.Component {
             margin: 20px;
           }
           .calculate {
-            width: 200px;
+            width: 180px;
             height: 40px;
-            margin: 0 auto;
+            margin: 20px auto 0;
+            background-color: #c63e4e;
+            color: #fff;
+            font-family: "Jost* 300", sans-serif;
+            border-radius: 100px;
+            border: none;
+            font-size: 20px;
+          }
+          .calculate:hover {
+            background-color: #b53544;
+            cursor: pointer;
+            transform: translateY(-1px);
+          }
+          .calculate:disabled {
+            background-color: #c76f7a;
           }
           .result_area {
             display: flex;
@@ -166,13 +192,14 @@ class Main extends React.Component {
           }
           .result_area h3 {
             font-size: 30px;
-            font-family: sans-serif;
-            text-transform: uppercase;
+            font-family: "Jost* 600 Semi", sans-serif;
             margin-bottom: 0;
+            text-transform: lowercase;
           }
           .result_area p {
-            font-family: sans-serif;
-            font-size: 25px;
+            font-family: "Jost* 600 Semi", sans-serif;
+            font-size: 45px;
+            min-height: 50px;
           }
         `}</style>
       </div>

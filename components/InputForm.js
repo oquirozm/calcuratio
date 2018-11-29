@@ -1,14 +1,23 @@
+import { Component, forwardRef } from "react";
 import propTypes from "prop-types";
+// i decided to import the css because fitting the
 import "../styles/InputForm.css";
 import { createRef } from "react";
-// formulas
 
-// get aspect ratio
-// import the function developerd in the other project
-// dedcutAspectRatio(w,h);
-// just input width and height
+// props
+// name
+// onChangeHandler
+// Ref
+const WorkingInput = forwardRef((props, ref) => (
+  <input
+    name={props.name}
+    onChange={props.onChangeHandler}
+    ref={ref}
+    type="text"
+  />
+));
 
-class InputForm extends React.Component {
+class InputForm extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,29 +62,30 @@ class InputForm extends React.Component {
         return (
           <div className="form_area">
             <div className="field-group">
-              <label>Height</label>
-              <input
+              <label>height</label>
+              <p>(in whatever measure unit, we’re talking proportions here)</p>
+              <WorkingInput
                 name="height"
-                type="text"
-                onChange={this.handleInputChange}
+                onChangeHandler={this.handleInputChange}
                 ref={this.heightInput}
               />
             </div>
             <div className="aspect_radio-container">
-              <p>Type the two dimensions of your aspect ratio</p>
-              <input
-                name="x"
-                type="text"
-                ref={this.xInput}
-                onChange={this.handleInputChange}
-              />{" "}
-              :
-              <input
-                name="y"
-                type="text"
-                ref={this.yInput}
-                onChange={this.handleInputChange}
-              />
+              <label>your current aspect ratio</label>
+              <p>(e.g. 4:3 or 16:9)</p>
+              <div className="aspect-radio-input-group">
+                <WorkingInput
+                  name="x"
+                  onChangeHandler={this.handleInputChange}
+                  ref={this.xInput}
+                />
+                <span>:</span>
+                <WorkingInput
+                  name="y"
+                  onChangeHandler={this.handleInputChange}
+                  ref={this.yInput}
+                />
+              </div>
             </div>
           </div>
         );
@@ -83,29 +93,30 @@ class InputForm extends React.Component {
         return (
           <div className="form_area">
             <div className="field-group">
-              <label>Width</label>
-              <input
+              <label>width</label>
+              <p>(in whatever measure unit, we’re talking proportions here)</p>
+              <WorkingInput
                 name="width"
-                type="text"
-                onChange={this.handleInputChange}
+                onChangeHandler={this.handleInputChange}
                 ref={this.widthInput}
               />
             </div>
             <div className="aspect_radio-container">
-              <p>Type the two dimensions of your aspect ratio</p>
-              <input
-                name="x"
-                type="text"
-                ref={this.xInput}
-                onChange={this.handleInputChange}
-              />{" "}
-              :
-              <input
-                name="y"
-                type="text"
-                ref={this.yInput}
-                onChange={this.handleInputChange}
-              />
+              <label>your current aspect ratio</label>
+              <p>(e.g. 4:3 or 16:9)</p>
+              <div className="aspect-radio-input-group">
+                <WorkingInput
+                  name="x"
+                  onChangeHandler={this.handleInputChange}
+                  ref={this.xInput}
+                />
+                <span>:</span>
+                <WorkingInput
+                  name="y"
+                  onChangeHandler={this.handleInputChange}
+                  ref={this.yInput}
+                />
+              </div>
             </div>
           </div>
         );
@@ -113,20 +124,20 @@ class InputForm extends React.Component {
         return (
           <div className="form_area">
             <div className="field-group">
-              <label>Width</label>
-              <input
+              <label>width</label>
+              <p>(in whatever measure unit, we’re talking proportions here)</p>
+              <WorkingInput
                 name="width"
-                type="text"
-                onChange={this.handleInputChange}
+                onChangeHandler={this.handleInputChange}
                 ref={this.widthInput}
               />
             </div>
             <div className="field-group">
-              <label>Height</label>
-              <input
+              <label>height</label>
+              <p>(in whatever measure unit, we’re talking proportions here)</p>
+              <WorkingInput
                 name="height"
-                type="text"
-                onChange={this.handleInputChange}
+                onChangeHandler={this.handleInputChange}
                 ref={this.heightInput}
               />
             </div>
