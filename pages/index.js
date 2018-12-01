@@ -131,8 +131,7 @@ class Main extends React.Component {
         </div>
         <div className="result_area">
           <h3>Result</h3>
-          {/* <p>{this.state.calculation}</p> */}
-          <p>400</p>
+          <p>{this.state.calculation}</p>
         </div>
         <style jsx>{`
           #header {

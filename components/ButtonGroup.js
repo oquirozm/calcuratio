@@ -78,7 +78,7 @@ class ButtonGroup extends React.Component {
           }
           @media (min-width: 1200px) {
             .button_group {
-              width: 500px;
+              width: 600px;
             }
           }
           @media (min-width: 600px) and (max-width: 1199px) {
