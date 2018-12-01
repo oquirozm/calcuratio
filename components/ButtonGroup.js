@@ -74,6 +74,7 @@ class ButtonGroup extends React.Component {
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            margin: 40px auto;
           }
           @media (min-width: 1200px) {
             .button_group {
