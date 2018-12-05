@@ -1,24 +1,12 @@
 import ButtonGroup from "../components/ButtonGroup";
 import InputForm from "../components/InputForm";
 import Head from "next/head";
-import helpers from "../helpers";
+import helpers from "../services/helpers";
 import "../styles/global.css";
 
+const { calculateAspectRatio } = helpers;
 let brandStyleVariables = {
   gray: "#F0F0F0",
-};
-
-const { toFixed } = helpers;
-
-const adjustDecimals = ratio => {
-  for (let index = 2; index < 1000; index++) {
-    let maybeX = ratio * index;
-    console.log(maybeX);
-    let decimals = toFixed(maybeX % 1, 2);
-    if (decimals > 0.9 && decimals < 1) {
-      return { x: Math.round(maybeX), y: index };
-    }
-  }
 };
 
 class Main extends React.Component {
@@ -46,7 +34,9 @@ class Main extends React.Component {
       // i need height, ratio x and y
       case "get_width":
         this.setState(state => {
-          let width = (state.values.x * state.values.height) / state.values.y;
+          let width = Math.round(
+            (state.values.x * state.values.height) / state.values.y
+          );
           let newState = { values: state.values, calculation: width };
           newState.values.width = width;
           return newState;
@@ -57,7 +47,9 @@ class Main extends React.Component {
       // i need width, ratio x and y
       case "get_height":
         this.setState(state => {
-          let height = (state.values.y * state.values.width) / state.values.x;
+          let height = Math.round(
+            (state.values.y * state.values.width) / state.values.x
+          );
           let newState = { values: state.values, calculation: height };
           newState.values.height = height;
           return newState;
@@ -65,12 +57,11 @@ class Main extends React.Component {
         break;
       case "get_aspect_ratio":
         this.setState(state => {
-          let height = state.values.height;
-          let width = state.values.width;
           let x, y;
-          // I'm using toFixed helper which truncs a float to 2 decimals without rounding
-          let ratio = toFixed(width / height, 2);
-          let aspectRatio = adjustDecimals(ratio);
+          let aspectRatio = calculateAspectRatio(
+            state.values.width,
+            state.values.height
+          );
           x = aspectRatio.x;
           y = aspectRatio.y;
 
