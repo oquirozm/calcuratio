@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "now-build": "next build && next export -o dist"
+    "now-build": "next build && next export -o dist",
+    "test": "jest"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -16,5 +17,9 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0"
   }
 }

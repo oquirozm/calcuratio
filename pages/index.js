@@ -11,8 +11,9 @@ let brandStyleVariables = {
 const { toFixed } = helpers;
 
 const adjustDecimals = ratio => {
-  for (let index = 2; index < 500; index++) {
+  for (let index = 2; index < 1000; index++) {
     let maybeX = ratio * index;
+    console.log(maybeX);
     let decimals = toFixed(maybeX % 1, 2);
     if (decimals > 0.9 && decimals < 1) {
       return { x: Math.round(maybeX), y: index };
@@ -67,7 +68,7 @@ class Main extends React.Component {
           let height = state.values.height;
           let width = state.values.width;
           let x, y;
-          // I'm using toFixed hleper which truncs a float to 2 decimals without rounding
+          // I'm using toFixed helper which truncs a float to 2 decimals without rounding
           let ratio = toFixed(width / height, 2);
           let aspectRatio = adjustDecimals(ratio);
           x = aspectRatio.x;

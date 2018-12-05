@@ -47,8 +47,6 @@ class InputForm extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (this.props.mode !== nextProps.mode) {
-      console.log(this.inputRefs);
-
       this.inputRefs
         .filter(ref => ref.current)
         .forEach(ref => (ref.current.value = ""));
