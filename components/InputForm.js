@@ -1,13 +1,32 @@
-import { Component, forwardRef } from "react";
-import propTypes from "prop-types";
-// i decided to import the css because fitting the
-import "../styles/InputForm.css";
-import { createRef } from "react";
+/*
+|--------------------------------------------------------------------------
+| Dependencies
+|--------------------------------------------------------------------------
+*/
+import { Component, forwardRef, createRef } from 'react';
+import propTypes from 'prop-types';
+import '../styles/InputForm.css';
 
-// props
-// name
-// onChangeHandler
-// Ref
+/*
+|--------------------------------------------------------------------------
+| propTypes
+|--------------------------------------------------------------------------
+*/
+
+InputForm.propTypes = {
+  mode: propTypes.oneOf(['get_width', 'get_height', 'get_aspect_ratio']),
+  updateValueHandler: propTypes.func.isRequired,
+};
+
+/*
+|--------------------------------------------------------------------------
+| Components
+|--------------------------------------------------------------------------
+*/
+
+// because we want to use the same input elements for different modes while letting
+// the InputForm component control their values, we use forwardRef
+// so we can pass down the refs created inside the InputForm component to the input elements.
 const WorkingInput = forwardRef((props, ref) => (
   <input
     name={props.name}
@@ -22,14 +41,13 @@ class InputForm extends Component {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
 
-    // creating refs
-    // we need refs in order to clean all the inputs every time we change update the form depending on the mode of the app
-
+    // we need refs in order to clean all the inputs every time we update the form depending the app is in.
     this.widthInput = createRef();
     this.heightInput = createRef();
     this.xInput = createRef();
     this.yInput = createRef();
 
+    // we store the just created refs in an array for easier manipulation later.
     this.inputRefs = [
       this.widthInput,
       this.heightInput,
@@ -38,25 +56,30 @@ class InputForm extends Component {
     ];
   }
 
+  // we basically pass the data from the input up to the Main component defined in index.js
+  // so it can update the state of the whole app.
   handleInputChange(e) {
     this.props.updateValueHandler(
-      e.target.getAttribute("name"),
+      e.target.getAttribute('name'),
       e.target.value
     );
   }
 
+  // clear the input elements values when the mode of the app changes
   shouldComponentUpdate(nextProps) {
     if (this.props.mode !== nextProps.mode) {
       this.inputRefs
         .filter(ref => ref.current)
-        .forEach(ref => (ref.current.value = ""));
+        .forEach(ref => (ref.current.value = ''));
     }
     return true;
   }
 
+  // render different inputs depending on the mode. This could probably be better done with routing
+  // and better organized components.
   render() {
     switch (this.props.mode) {
-      case "get_width":
+      case 'get_width':
         return (
           <div className="form_area">
             <div className="field-group">
@@ -87,7 +110,7 @@ class InputForm extends Component {
             </div>
           </div>
         );
-      case "get_height":
+      case 'get_height':
         return (
           <div className="form_area">
             <div className="field-group">
@@ -118,7 +141,7 @@ class InputForm extends Component {
             </div>
           </div>
         );
-      case "get_aspect_ratio":
+      case 'get_aspect_ratio':
         return (
           <div className="form_area">
             <div className="field-group">
@@ -147,10 +170,4 @@ class InputForm extends Component {
   }
 }
 
-InputForm.propTypes = {
-  mode: propTypes.oneOf(["get_width", "get_height", "get_aspect_ratio"]),
-  updateValueHandler: propTypes.func.isRequired,
-};
-
-// export default InputForm;
 export default InputForm;

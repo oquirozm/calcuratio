@@ -1,73 +1,80 @@
-import ButtonGroup from "../components/ButtonGroup";
-import InputForm from "../components/InputForm";
-import Head from "next/head";
-import helpers from "../services/helpers";
-import "../styles/global.css";
+/*
+|--------------------------------------------------------------------------
+| Dependencies
+|--------------------------------------------------------------------------
+*/
 
-const { calculateAspectRatio } = helpers;
-let brandStyleVariables = {
-  gray: "#F0F0F0",
-};
+import Head from 'next/head';
+import '../styles/global.css';
+import ButtonGroup from '../components/ButtonGroup';
+import InputForm from '../components/InputForm';
+import { calculateAspectRatio } from '../services/helpers';
+
+/*
+|--------------------------------------------------------------------------
+| Component
+|--------------------------------------------------------------------------
+*/
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "get_width",
-      values: {
+      mode: 'get_width',
+      calcValues: {
         width: null,
         height: null,
         x: null,
         y: null,
       },
-      calculation: "",
+      calculation: '',
     };
     this.handleModeChange = this.handleModeChange.bind(this);
     this.updateValue = this.updateValue.bind(this);
     this.calculate = this.calculate.bind(this);
   }
 
+  // the function that actually calculates the output
   calculate() {
     switch (this.state.mode) {
-      // get width
+      // Calculate width based on the passed values and update the state accordingly
       // w = (x*h)/y
-      // i need height, ratio x and y
-      case "get_width":
+      case 'get_width':
         this.setState(state => {
           let width = Math.round(
-            (state.values.x * state.values.height) / state.values.y
+            (state.calcValues.x * state.calcValues.height) / state.calcValues.y
           );
-          let newState = { values: state.values, calculation: width };
-          newState.values.width = width;
+          let newState = { calcValues: state.calcValues, calculation: width };
+          newState.calcValues.width = width;
           return newState;
         });
         break;
-      // get height
+      // Calculate height based on the passed values and update the state accordingly
       // h = (y*w)/x
-      // i need width, ratio x and y
-      case "get_height":
+      case 'get_height':
         this.setState(state => {
           let height = Math.round(
-            (state.values.y * state.values.width) / state.values.x
+            (state.calcValues.y * state.calcValues.width) / state.calcValues.x
           );
-          let newState = { values: state.values, calculation: height };
-          newState.values.height = height;
+          let newState = { calcValues: state.calcValues, calculation: height };
+          newState.calcValues.height = height;
           return newState;
         });
         break;
-      case "get_aspect_ratio":
+      // Calculate the aspect ratio (with the helper function) based on the passed values and update hte state accordingly.
+      case 'get_aspect_ratio':
         this.setState(state => {
-          let x, y;
           let aspectRatio = calculateAspectRatio(
-            state.values.width,
-            state.values.height
+            state.calcValues.width,
+            state.calcValues.height
           );
-          x = aspectRatio.x;
-          y = aspectRatio.y;
+          let x = aspectRatio.x;
+          let y = aspectRatio.y;
 
-          let newState = { values: state.values, calculation: x + ":" + y };
-          newState.values.x = x;
-          newState.values.y = y;
+          let newState = {
+            calcValues: { x, y },
+            calculation: x + ':' + y,
+          };
           return newState;
         });
         break;
@@ -76,10 +83,11 @@ class Main extends React.Component {
     }
   }
 
+  // function to update just one value in the state
   updateValue(key, value) {
     this.setState(state => {
-      let newState = { values: state.values };
-      newState.values[key] = parseInt(value);
+      let newState = { calcValues: state.calcValues };
+      newState.calcValues[key] = parseInt(value);
       return newState;
     });
   }
@@ -87,7 +95,7 @@ class Main extends React.Component {
   handleModeChange(mode) {
     this.setState({
       mode: mode,
-      calculation: "",
+      calculation: '',
     });
   }
 
@@ -138,13 +146,13 @@ class Main extends React.Component {
             }
           }
           #header h1 {
-            font-family: "Jost* 400 Book", sans-serif;
+            font-family: 'Jost* 400 Book', sans-serif;
             font-size: 18px;
             letter-spacing: 0.5px;
             border-bottom: 2px solid black;
           }
           #header .made-by {
-            font-family: "Jost* 600 Semi", sans-serif;
+            font-family: 'Jost* 600 Semi', sans-serif;
             font-size: 15px;
             letter-spacing: 0.5px;
           }
@@ -162,7 +170,7 @@ class Main extends React.Component {
             margin: 20px auto 0;
             background-color: #c63e4e;
             color: #fff;
-            font-family: "Jost* 300", sans-serif;
+            font-family: 'Jost* 300', sans-serif;
             border-radius: 100px;
             border: none;
             font-size: 20px;
@@ -183,12 +191,12 @@ class Main extends React.Component {
           }
           .result_area h3 {
             font-size: 30px;
-            font-family: "Jost* 600 Semi", sans-serif;
+            font-family: 'Jost* 600 Semi', sans-serif;
             margin-bottom: 0;
             text-transform: lowercase;
           }
           .result_area p {
-            font-family: "Jost* 600 Semi", sans-serif;
+            font-family: 'Jost* 600 Semi', sans-serif;
             font-size: 45px;
             min-height: 50px;
           }
