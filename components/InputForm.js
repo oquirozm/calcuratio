@@ -3,20 +3,9 @@
 | Dependencies
 |--------------------------------------------------------------------------
 */
-import { Component, forwardRef, createRef } from 'react';
-import propTypes from 'prop-types';
-import '../styles/InputForm.css';
-
-/*
-|--------------------------------------------------------------------------
-| propTypes
-|--------------------------------------------------------------------------
-*/
-
-InputForm.propTypes = {
-  mode: propTypes.oneOf(['get_width', 'get_height', 'get_aspect_ratio']),
-  updateValueHandler: propTypes.func.isRequired,
-};
+import { Component, forwardRef, createRef } from "react";
+import propTypes from "prop-types";
+import "../styles/InputForm.css";
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +45,16 @@ class InputForm extends Component {
     ];
   }
 
+  static propTypes = {
+    mode: propTypes.oneOf(["get_width", "get_height", "get_aspect_ratio"]),
+    updateValueHandler: propTypes.func.isRequired,
+  };
+
   // we basically pass the data from the input up to the Main component defined in index.js
   // so it can update the state of the whole app.
   handleInputChange(e) {
     this.props.updateValueHandler(
-      e.target.getAttribute('name'),
+      e.target.getAttribute("name"),
       e.target.value
     );
   }
@@ -70,7 +64,7 @@ class InputForm extends Component {
     if (this.props.mode !== nextProps.mode) {
       this.inputRefs
         .filter(ref => ref.current)
-        .forEach(ref => (ref.current.value = ''));
+        .forEach(ref => (ref.current.value = ""));
     }
     return true;
   }
@@ -79,7 +73,7 @@ class InputForm extends Component {
   // and better organized components.
   render() {
     switch (this.props.mode) {
-      case 'get_width':
+      case "get_width":
         return (
           <div className="form_area">
             <div className="field-group">
@@ -110,7 +104,7 @@ class InputForm extends Component {
             </div>
           </div>
         );
-      case 'get_height':
+      case "get_height":
         return (
           <div className="form_area">
             <div className="field-group">
@@ -141,7 +135,7 @@ class InputForm extends Component {
             </div>
           </div>
         );
-      case 'get_aspect_ratio':
+      case "get_aspect_ratio":
         return (
           <div className="form_area">
             <div className="field-group">

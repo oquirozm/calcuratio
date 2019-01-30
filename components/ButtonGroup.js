@@ -3,17 +3,6 @@ import PropTypes from 'prop-types';
 
 /*
 |--------------------------------------------------------------------------
-| Proptypes
-|--------------------------------------------------------------------------
-*/
-
-ButtonGroup.propTypes = {
-  handleModeChange: PropTypes.func.isRequired,
-  mode: PropTypes.oneOf(['get_width', 'get_height', 'get_aspect_ratio']),
-};
-
-/*
-|--------------------------------------------------------------------------
 | Other variables
 |--------------------------------------------------------------------------
 */
@@ -58,6 +47,11 @@ class ButtonGroup extends React.Component {
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleModeChange = this.props.handleModeChange.bind(this);
+  }
+
+  static propTypes = {
+    handleModeChange: PropTypes.func.isRequired,
+    mode: PropTypes.oneOf(['get_width', 'get_height', 'get_aspect_ratio']),
   }
 
   // On receiving a click on any of the buttons rendered the content of the inputForm will change.
