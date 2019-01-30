@@ -4,11 +4,15 @@
 |--------------------------------------------------------------------------
 */
 
-import Head from 'next/head';
-import '../styles/global.css';
-import ButtonGroup from '../components/ButtonGroup';
-import InputForm from '../components/InputForm';
-import { calculateAspectRatio } from '../services/helpers';
+import Head from "next/head";
+import "../styles/global.css";
+import ModeSelector from "../components/ModeSelector";
+import UserInputForm from "../components/UserInputForm";
+import {
+  calculateWidth,
+  calculateHeight,
+  calculateAspectRatio,
+} from "../services/helpers";
 
 /*
 |--------------------------------------------------------------------------
@@ -19,85 +23,64 @@ import { calculateAspectRatio } from '../services/helpers';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      mode: 'get_width',
-      calcValues: {
-        width: null,
-        height: null,
-        x: null,
-        y: null,
-      },
-      calculation: '',
-    };
-    this.handleModeChange = this.handleModeChange.bind(this);
-    this.updateValue = this.updateValue.bind(this);
-    this.calculate = this.calculate.bind(this);
   }
 
-  // the function that actually calculates the output
-  calculate() {
-    switch (this.state.mode) {
-      // Calculate width based on the passed values and update the state accordingly
-      // w = (x*h)/y
-      case 'get_width':
-        this.setState(state => {
-          let width = Math.round(
-            (state.calcValues.x * state.calcValues.height) / state.calcValues.y
-          );
-          let newState = { calcValues: state.calcValues, calculation: width };
-          newState.calcValues.width = width;
-          return newState;
-        });
-        break;
-      // Calculate height based on the passed values and update the state accordingly
-      // h = (y*w)/x
-      case 'get_height':
-        this.setState(state => {
-          let height = Math.round(
-            (state.calcValues.y * state.calcValues.width) / state.calcValues.x
-          );
-          let newState = { calcValues: state.calcValues, calculation: height };
-          newState.calcValues.height = height;
-          return newState;
-        });
-        break;
-      // Calculate the aspect ratio (with the helper function) based on the passed values and update hte state accordingly.
-      case 'get_aspect_ratio':
-        this.setState(state => {
-          let aspectRatio = calculateAspectRatio(
-            state.calcValues.width,
-            state.calcValues.height
-          );
-          let x = aspectRatio.x;
-          let y = aspectRatio.y;
+  state = {
+    mode: "get_width",
+    width: null,
+    height: null,
+    xRatio: null,
+    yRatio: null,
+    result: "",
+  };
 
-          let newState = {
-            calcValues: { x, y },
-            calculation: x + ':' + y,
-          };
-          return newState;
+  // In future versions it should round some aspect ratios to the most used resolutions. See the following link for reference: https://stackoverflow.com/a/13466237/2577494
+
+  calculate = mode => {
+    switch (mode) {
+      case "get_width":
+        let width = calculateWidth({
+          xRatio: this.state.xRatio,
+          yRatio: this.state.yRatio,
+          height: this.state.height,
         });
+        this.setState({ result: width });
         break;
+
+      case "get_height":
+        let height = calculateHeight({
+          xRatio: this.state.xRatio,
+          yRatio: this.state.yRatio,
+          width: this.state.width,
+        });
+        this.setState({ result: height });
+        break;
+
+      case "get_aspect_ratio":
+        let { x, y } = calculateAspectRatio(
+          this.state.width,
+          this.state.height
+        );
+        this.setState({ result: x + ":" + y });
+        break;
+
       default:
         null;
     }
-  }
+  };
 
-  // function to update just one value in the state
-  updateValue(key, value) {
-    this.setState(state => {
-      let newState = { calcValues: state.calcValues };
-      newState.calcValues[key] = parseInt(value);
-      return newState;
-    });
-  }
+  // this callback is passed down to the child's components so they can update
+  // the Main comopnent's state
+  updateUserInputs = (key, value) => {
+    this.setState({ [key]: value });
+  };
 
-  handleModeChange(mode) {
+  updateMode = mode => {
     this.setState({
       mode: mode,
-      calculation: '',
+      result: "",
     });
-  }
+  };
 
   render() {
     return (
@@ -110,29 +93,36 @@ class Main extends React.Component {
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
+
         <header id="header">
           <h1 className="title">calcuratio</h1>
           <p className="made-by">
             made with ♡ by <a>omar</a>
           </p>
         </header>
-        <ButtonGroup
-          handleModeChange={this.handleModeChange}
+
+        <ModeSelector
+          handleModeUpdate={this.updateMode}
           mode={this.state.mode}
         />
+
         <div className="form_container">
-          <InputForm
+          <UserInputForm
             mode={this.state.mode}
-            updateValueHandler={this.updateValue}
+            updateGlobalUserInputs={this.updateUserInputs}
           />
-          <button className="calculate" onClick={this.calculate}>
+          <button
+            className="calculate"
+            onClick={e => this.calculate(this.state.mode)}>
             calculate
           </button>
         </div>
+
         <div className="result_area">
           <h3>Result</h3>
-          <p>{this.state.calculation}</p>
+          <p>{this.state.result}</p>
         </div>
+
         <style jsx>{`
           #header {
             display: flex;
@@ -146,13 +136,13 @@ class Main extends React.Component {
             }
           }
           #header h1 {
-            font-family: 'Jost* 400 Book', sans-serif;
+            font-family: "Jost* 400 Book", sans-serif;
             font-size: 18px;
             letter-spacing: 0.5px;
             border-bottom: 2px solid black;
           }
           #header .made-by {
-            font-family: 'Jost* 600 Semi', sans-serif;
+            font-family: "Jost* 600 Semi", sans-serif;
             font-size: 15px;
             letter-spacing: 0.5px;
           }
@@ -170,7 +160,7 @@ class Main extends React.Component {
             margin: 20px auto 0;
             background-color: #c63e4e;
             color: #fff;
-            font-family: 'Jost* 300', sans-serif;
+            font-family: "Jost* 300", sans-serif;
             border-radius: 100px;
             border: none;
             font-size: 20px;
@@ -191,12 +181,12 @@ class Main extends React.Component {
           }
           .result_area h3 {
             font-size: 30px;
-            font-family: 'Jost* 600 Semi', sans-serif;
+            font-family: "Jost* 600 Semi", sans-serif;
             margin-bottom: 0;
             text-transform: lowercase;
           }
           .result_area p {
-            font-family: 'Jost* 600 Semi', sans-serif;
+            font-family: "Jost* 600 Semi", sans-serif;
             font-size: 45px;
             min-height: 50px;
           }

@@ -8,7 +8,18 @@ const calculateGCD = (a, b) => {
   return b == 0 ? a : calculateGCD(b, a % b);
 };
 
-// this function calculates the aspect ratio in the simplest way. In future versions it should round some aspect ratios to the most used resolutions. See the following link for reference: https://stackoverflow.com/a/13466237/2577494
+const calculateWidth = values => {
+  let { xRatio, yRatio, height } = values;
+  let width = Math.round((xRatio * height) / yRatio);
+  return width;
+};
+
+const calculateHeight = values => {
+  let { xRatio, yRatio, width } = values;
+  let height = Math.round((yRatio * width) / xRatio);
+  return height;
+};
+
 const calculateAspectRatio = (width, height) => {
   let gcd = calculateGCD(width, height);
   return {
@@ -17,4 +28,4 @@ const calculateAspectRatio = (width, height) => {
   };
 };
 
-export { calculateAspectRatio, calculateGCD };
+export { calculateWidth, calculateHeight, calculateAspectRatio };
