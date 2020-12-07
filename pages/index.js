@@ -1,9 +1,4 @@
-/*
-|--------------------------------------------------------------------------
-| Dependencies
-|--------------------------------------------------------------------------
-*/
-
+import React, { useState } from "react";
 import Head from "next/head";
 import "../styles/global.css";
 import ModeSelector from "../components/ModeSelector";
@@ -14,75 +9,69 @@ import {
   calculateAspectRatio,
 } from "../services/helpers";
 
-/*
-|--------------------------------------------------------------------------
-| Component
-|--------------------------------------------------------------------------
-*/
+const Main = () => {
+  const [mode, setMode] = useState("get_width");
+  const [dimensions, setDimensions] = useState({ width: null, height: null });
+  const [ratios, setRatios] = useState({ x: null, y: null })
+  const [result, setResult] = useState("");
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  state = {
-    mode: "get_width",
-    width: null,
-    height: null,
-    xRatio: null,
-    yRatio: null,
-    result: "",
-  };
-
-  // In future versions it should round some aspect ratios to the most used resolutions. See the following link for reference: https://stackoverflow.com/a/13466237/2577494
-
-  calculate = mode => {
+  const calculate = (mode) => {
     switch (mode) {
       case "get_width":
-        let width = calculateWidth({
-          xRatio: this.state.xRatio,
-          yRatio: this.state.yRatio,
-          height: this.state.height,
+        const width = calculateWidth({
+          xRatio: ratios.x,
+          yRatio: ratios.y,
+          height: dimensions.height,
         });
-        this.setState({ result: width });
+        setResult(width);
         break;
 
       case "get_height":
-        let height = calculateHeight({
-          xRatio: this.state.xRatio,
-          yRatio: this.state.yRatio,
-          width: this.state.width,
+        const height = calculateHeight({
+          xRatio: ratios.x,
+          yRatio: ratios.y,
+          width: dimensions.width,
         });
-        this.setState({ result: height });
+        setResult(height);
         break;
 
       case "get_aspect_ratio":
         let { x, y } = calculateAspectRatio(
-          this.state.width,
-          this.state.height
+          dimensions.width,
+          dimensions.height,
         );
-        this.setState({ result: x + ":" + y });
+        setResult(`${x}:${y}`);
         break;
 
       default:
-        null;
+        break;
     }
   };
 
-  // this callback is passed down to the child's components so they can update
-  // the Main comopnent's state
-  updateUserInputs = (key, value) => {
-    this.setState({ [key]: value });
+  const updateUserInputs = (key, value) => {
+    switch (key) {
+      case "xRatio":
+        setRatios( prev => ({...prev, x: value}));
+        break;
+      case "yRatio":
+        setRatios( prev => ({...prev, y: value}));
+        break;
+      case "width":
+        setDimensions(prev => ({...prev, width: value}));
+        break;
+      case "height":
+        setDimensions(prev => ({...prev, height: value}));
+        break;
+      default:
+        break;
+    }
   };
 
-  updateMode = mode => {
-    this.setState({
-      mode: mode,
-      result: "",
-    });
+  const updateMode = (mode) => {
+    setMode(mode);
+    setResult("");
   };
 
-  render() {
     return (
       <div>
         <Head>
@@ -102,25 +91,26 @@ class Main extends React.Component {
         </header>
 
         <ModeSelector
-          handleModeUpdate={this.updateMode}
-          mode={this.state.mode}
+          handleModeUpdate={updateMode}
+          mode={mode}
         />
 
         <div className="form_container">
           <UserInputForm
-            mode={this.state.mode}
-            updateGlobalUserInputs={this.updateUserInputs}
+            mode={mode}
+            updateGlobalUserInputs={updateUserInputs}
           />
           <button
             className="calculate"
-            onClick={e => this.calculate(this.state.mode)}>
+            onClick={(e) => calculate(mode)}
+          >
             calculate
           </button>
         </div>
 
         <div className="result_area">
           <h3>Result</h3>
-          <p>{this.state.result}</p>
+          <p>{result}</p>
         </div>
 
         <style jsx>{`
@@ -193,7 +183,6 @@ class Main extends React.Component {
         `}</style>
       </div>
     );
-  }
-}
+};
 
 export default Main;
