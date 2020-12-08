@@ -1,17 +1,63 @@
-/*
-|--------------------------------------------------------------------------
-| Dependencies
-|--------------------------------------------------------------------------
-*/
 import { Component, forwardRef, createRef } from "react";
-import propTypes from "prop-types";
-import "../styles/InputForm.css";
+import styled from "styled-components";
+import { Flex } from "../components";
+import { space, layout } from "styled-system";
 
-/*
-|--------------------------------------------------------------------------
-| Components
-|--------------------------------------------------------------------------
-*/
+const FormArea = styled(Flex).attrs( props => ({
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  pt: 2,
+  pb: 3,
+  px: 3,
+  mt: 0,
+  mx: "auto"
+}))`
+  width: 100%;
+  max-width: 600px;
+  background-color: #f0f0f0;
+  border-radius: 25px;
+`;
+
+const FieldGroup = styled(Flex).attrs(props => ({
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  mt: 3,
+  ...props
+}))``;
+
+const Label = styled.label`
+  font-family: "Jost* 500", sans-serif;
+  font-size: 25px;
+  text-align: center;
+`;
+
+const Paragraph = styled.p`
+  font-family: "Jost* 300", sans-serif;
+  color: #6f6f6f;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+`;
+
+const Input = styled.input`
+  ${space}
+  ${layout}
+  background-color: #fff;
+  border: 0;
+  border-radius: 1px;
+  height: 30px;
+  color: #000;
+  font-family: "Jost* 600 Semi", sans-serif;
+  font-size: 25px;
+  text-align: center;
+`;
+
+const Span = styled.span`
+  font-size: 25px;
+  font-family: "Jost* 600 Semi", sans-serif;
+`;
 
 const GetWidthForm = props => {
   const updateStateWithUserInput = (key, value) => {
@@ -20,40 +66,52 @@ const GetWidthForm = props => {
   };
 
   return (
-    <div className="form_area">
-      <div className="field-group">
-        <label>height</label>
-        <p>(in whatever measure unit, we’re talking proportions here)</p>
-        <input
+    <FormArea>
+      <FieldGroup>
+        <Label>height</Label>
+        <Paragraph>
+          (in whatever measure unit, we’re talking proportions here)
+        </Paragraph>
+        <Input
+          width={150}
           type="text"
           name="height"
-          onChange={e =>
+          onChange={(e) =>
             updateStateWithUserInput(e.target.name, e.target.value)
           }
         />
-      </div>
-      <div className="aspect-radio-form-container">
-        <label>your current aspect ratio</label>
-        <p>(e.g. 4:3 or 16:9)</p>
+      </FieldGroup>
+      <Flex
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        mt={3}
+      >
+        <Label>your current aspect ratio</Label>
+        <Paragraph>(e.g. 4:3 or 16:9)</Paragraph>
         <div className="aspect-radio-group-group">
-          <input
+          <Input
+            width={80}
+            mx={2}
             type="text"
             name="xRatio"
-            onChange={e =>
+            onChange={(e) =>
               updateStateWithUserInput(e.target.name, e.target.value)
             }
           />
-          <span>:</span>
-          <input
+          <Span>:</Span>
+          <Input
+            width={80}
+            mx={2}
             type="text"
             name="yRatio"
-            onChange={e =>
+            onChange={(e) =>
               updateStateWithUserInput(e.target.name, e.target.value)
             }
           />
         </div>
-      </div>
-    </div>
+      </Flex>
+    </FormArea>
   );
 };
 
@@ -64,40 +122,43 @@ const GetHeightForm = props => {
   };
 
   return (
-    <div className="form_area">
-      <div className="field-group">
-        <label>width</label>
-        <p>(in whatever measure unit, we’re talking proportions here)</p>
-        <input
+    <FormArea>
+      <FieldGroup>
+        <Label>width</Label>
+        <Paragraph>
+          (in whatever measure unit, we’re talking proportions here)
+        </Paragraph>
+        <Input
+          width={150}
           type="text"
           name="width"
-          onChange={e =>
+          onChange={(e) =>
             updateStateWithUserInput(e.target.name, e.target.value)
           }
         />
-      </div>
-      <div className="aspect-radio-form-container">
-        <label>your current aspect ratio</label>
-        <p>(e.g. 4:3 or 16:9)</p>
+      </FieldGroup>
+      <Flex flexDirection="column" justifyContent="center" alignItems="center" mt={3}>
+        <Label>your current aspect ratio</Label>
+        <Paragraph>(e.g. 4:3 or 16:9)</Paragraph>
         <div className="aspect-radio-input-group">
-          <input
+          <Input
             type="text"
             name="xRatio"
-            onChange={e =>
+            onChange={(e) =>
               updateStateWithUserInput(e.target.name, e.target.value)
             }
           />
-          <span>:</span>
-          <input
+          <Span>:</Span>
+          <Input
             type="text"
             name="yRatio"
-            onChange={e =>
+            onChange={(e) =>
               updateStateWithUserInput(e.target.name, e.target.value)
             }
           />
         </div>
-      </div>
-    </div>
+      </Flex>
+    </FormArea>
   );
 };
 
@@ -108,30 +169,36 @@ const GetAspectRatioForm = props => {
   };
 
   return (
-    <div className="form_area">
-      <div className="field-group">
-        <label>width</label>
-        <p>(in whatever measure unit, we’re talking proportions here)</p>
-        <input
+    <FormArea>
+      <FieldGroup>
+        <Label>width</Label>
+        <Paragraph>
+          (in whatever measure unit, we’re talking proportions here)
+        </Paragraph>
+        <Input
+          width={150}
           type="text"
           name="width"
-          onChange={e =>
+          onChange={(e) =>
             updateStateWithUserInput(e.target.name, e.target.value)
           }
         />
-      </div>
-      <div className="field-group">
-        <label>height</label>
-        <p>(in whatever measure unit, we’re talking proportions here)</p>
-        <input
+      </FieldGroup>
+      <FieldGroup>
+        <Label>height</Label>
+        <Paragraph>
+          (in whatever measure unit, we’re talking proportions here)
+        </Paragraph>
+        <Input
+          width={150}
           type="text"
           name="height"
-          onChange={e =>
+          onChange={(e) =>
             updateStateWithUserInput(e.target.name, e.target.value)
           }
         />
-      </div>
-    </div>
+      </FieldGroup>
+    </FormArea>
   );
 };
 
@@ -139,11 +206,6 @@ class UserInputForm extends Component {
   constructor(props) {
     super(props);
   }
-
-  static propTypes = {
-    mode: propTypes.oneOf(["get_width", "get_height", "get_aspect_ratio"]),
-    updateGlobalUserInputs: propTypes.func.isRequired,
-  };
 
   render() {
     switch (this.props.mode) {
