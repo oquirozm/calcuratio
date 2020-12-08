@@ -59,11 +59,7 @@ const Span = styled.span`
   font-family: "Jost* 600 Semi", sans-serif;
 `;
 
-const GetWidthForm = props => {
-  const updateStateWithUserInput = (key, value) => {
-    // update the parent component's state
-    props.onChangeHandler(key, value);
-  };
+const GetWidthForm = ({ onChangeHandler }) => {
 
   return (
     <FormArea>
@@ -76,9 +72,7 @@ const GetWidthForm = props => {
           width={150}
           type="text"
           name="height"
-          onChange={(e) =>
-            updateStateWithUserInput(e.target.name, e.target.value)
-          }
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         />
       </FieldGroup>
       <Flex
@@ -95,9 +89,7 @@ const GetWidthForm = props => {
             mx={2}
             type="text"
             name="xRatio"
-            onChange={(e) =>
-              updateStateWithUserInput(e.target.name, e.target.value)
-            }
+            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
           />
           <Span>:</Span>
           <Input
@@ -105,9 +97,7 @@ const GetWidthForm = props => {
             mx={2}
             type="text"
             name="yRatio"
-            onChange={(e) =>
-              updateStateWithUserInput(e.target.name, e.target.value)
-            }
+            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
           />
         </div>
       </Flex>
@@ -115,11 +105,7 @@ const GetWidthForm = props => {
   );
 };
 
-const GetHeightForm = props => {
-  const updateStateWithUserInput = (key, value) => {
-    // update the parent component's state
-    props.onChangeHandler(key, value);
-  };
+const GetHeightForm = ({ onChangeHandler }) => {
 
   return (
     <FormArea>
@@ -132,29 +118,28 @@ const GetHeightForm = props => {
           width={150}
           type="text"
           name="width"
-          onChange={(e) =>
-            updateStateWithUserInput(e.target.name, e.target.value)
-          }
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         />
       </FieldGroup>
-      <Flex flexDirection="column" justifyContent="center" alignItems="center" mt={3}>
+      <Flex
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        mt={3}
+      >
         <Label>your current aspect ratio</Label>
         <Paragraph>(e.g. 4:3 or 16:9)</Paragraph>
         <div className="aspect-radio-input-group">
           <Input
             type="text"
             name="xRatio"
-            onChange={(e) =>
-              updateStateWithUserInput(e.target.name, e.target.value)
-            }
+            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
           />
           <Span>:</Span>
           <Input
             type="text"
             name="yRatio"
-            onChange={(e) =>
-              updateStateWithUserInput(e.target.name, e.target.value)
-            }
+            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
           />
         </div>
       </Flex>
@@ -162,11 +147,7 @@ const GetHeightForm = props => {
   );
 };
 
-const GetAspectRatioForm = props => {
-  const updateStateWithUserInput = (key, value) => {
-    // update the parent component's state
-    props.onChangeHandler(key, value);
-  };
+const GetAspectRatioForm = ({ onChangeHandler }) => {
 
   return (
     <FormArea>
@@ -180,7 +161,7 @@ const GetAspectRatioForm = props => {
           type="text"
           name="width"
           onChange={(e) =>
-            updateStateWithUserInput(e.target.name, e.target.value)
+            onChangeHandler(e.target.name, e.target.value)
           }
         />
       </FieldGroup>
@@ -194,7 +175,7 @@ const GetAspectRatioForm = props => {
           type="text"
           name="height"
           onChange={(e) =>
-            updateStateWithUserInput(e.target.name, e.target.value)
+            onChangeHandler(e.target.name, e.target.value)
           }
         />
       </FieldGroup>
@@ -202,31 +183,26 @@ const GetAspectRatioForm = props => {
   );
 };
 
-class UserInputForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+const UserInputForm = ({ mode, updateGlobalUserInputs }) => {
 
-  render() {
-    switch (this.props.mode) {
-      case "get_width":
-        return (
-          <GetWidthForm onChangeHandler={this.props.updateGlobalUserInputs} />
-        );
-      case "get_height":
-        return (
-          <GetHeightForm onChangeHandler={this.props.updateGlobalUserInputs} />
-        );
-      case "get_aspect_ratio":
-        return (
-          <GetAspectRatioForm
-            onChangeHandler={this.props.updateGlobalUserInputs}
-          />
-        );
-      default:
-        return null;
-    }
-  }
+   switch (mode) {
+     case "get_width":
+       return (
+         <GetWidthForm onChangeHandler={updateGlobalUserInputs} />
+       );
+     case "get_height":
+       return (
+         <GetHeightForm onChangeHandler={updateGlobalUserInputs} />
+       );
+     case "get_aspect_ratio":
+       return (
+         <GetAspectRatioForm
+           onChangeHandler={updateGlobalUserInputs}
+         />
+       );
+     default:
+       return null;
+   }
 }
 
 export default UserInputForm;
