@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Head from "next/head";
 import "../styles/global.css";
 import ModeSelector from "../components/ModeSelector";
 import UserInputForm from "../components/UserInputForm";
+import { Title, Text, Flex, Button } from "../components";
 import {
   calculateWidth,
   calculateHeight,
@@ -83,104 +85,33 @@ const Main = () => {
           />
         </Head>
 
-        <header id="header">
-          <h1 className="title">calcuratio</h1>
-          <p className="made-by">
+        <Flex type="header" justifyContent="space-between"
+        p={4}
+        mb={6}
+        >
+          <Title mb={[2, 0]}>calcuratio</Title>
+          <Text type="p">
             made with ♡ by <a>omar</a>
-          </p>
-        </header>
+          </Text>
+        </Flex>
 
-        <ModeSelector
-          handleModeUpdate={updateMode}
-          mode={mode}
-        />
+        <ModeSelector handleModeUpdate={updateMode} mode={mode} />
 
-        <div className="form_container">
+        <Flex flexDirection="column" m={4} alignItems="center">
           <UserInputForm
             mode={mode}
             updateGlobalUserInputs={updateUserInputs}
           />
-          <button
-            className="calculate"
-            onClick={(e) => calculate(mode)}
-          >
+          <Button className="calculate" mt={4} onClick={(e) => calculate(mode)}>
             calculate
-          </button>
-        </div>
+          </Button>
+        </Flex>
 
-        <div className="result_area">
-          <h3>Result</h3>
-          <p>{result}</p>
-        </div>
-
-        <style jsx>{`
-          #header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            margin-bottom: 50px;
-          }
-          @media (max-width: 599px) {
-            #header {
-              margin-bottom: 10px;
-            }
-          }
-          #header h1 {
-            font-family: "Jost* 400 Book", sans-serif;
-            font-size: 18px;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid black;
-          }
-          #header .made-by {
-            font-family: "Jost* 600 Semi", sans-serif;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-          }
-          .title_area h1 {
-            text-align: center;
-          }
-          .form_container {
-            display: flex;
-            flex-direction: column;
-            margin: 20px;
-          }
-          .calculate {
-            width: 180px;
-            height: 40px;
-            margin: 20px auto 0;
-            background-color: #c63e4e;
-            color: #fff;
-            font-family: "Jost* 300", sans-serif;
-            border-radius: 100px;
-            border: none;
-            font-size: 20px;
-          }
-          .calculate:hover {
-            background-color: #b53544;
-            cursor: pointer;
-            transform: translateY(-1px);
-          }
-          .calculate:disabled {
-            background-color: #c76f7a;
-          }
-          .result_area {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-          .result_area h3 {
-            font-size: 30px;
-            font-family: "Jost* 600 Semi", sans-serif;
-            margin-bottom: 0;
-            text-transform: lowercase;
-          }
-          .result_area p {
-            font-family: "Jost* 600 Semi", sans-serif;
-            font-size: 45px;
-            min-height: 50px;
-          }
-        `}</style>
+        <Flex flexDirection="column"
+        justifyContent="center" alignItems="center">
+          <Title type="h3" fontSize={30}>Result</Title>
+          <Text type="p" fontSize={45}>{result}</Text>
+        </Flex>
       </div>
     );
 };
