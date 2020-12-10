@@ -18,35 +18,33 @@ const Main = () => {
   const [result, setResult] = useState("");
 
   const calculate = (mode) => {
-    switch (mode) {
-      case "get_width":
-        const width = calculateWidth({
-          xRatio: ratios.x,
-          yRatio: ratios.y,
-          height: dimensions.height,
-        });
-        setResult(width);
-        break;
+    let resultString = "";
 
-      case "get_height":
-        const height = calculateHeight({
-          xRatio: ratios.x,
-          yRatio: ratios.y,
-          width: dimensions.width,
-        });
-        setResult(height);
-        break;
+    if (mode === "get_width") {
+      const width = calculateWidth({
+        xRatio: ratios.x,
+        yRatio: ratios.y,
+        height: dimensions.height,
+      });
+      resultString = `${width}`;
+    }
 
-      case "get_aspect_ratio":
-        let { x, y } = calculateAspectRatio(
-          dimensions.width,
-          dimensions.height,
-        );
-        setResult(`${x}:${y}`);
-        break;
+    if ( mode === "get_height") {
+      const height = calculateHeight({
+        xRatio: ratios.x,
+        yRatio: ratios.y,
+        width: dimensions.width,
+      });
+      resultString = `${height}`;
+    }
 
-      default:
-        break;
+    if ( mode === "get_aspect_ratio") {
+      let { x, y } = calculateAspectRatio(dimensions.width, dimensions.height);
+      resultString = `${x}:${y}`;
+    }
+
+    if (resultString) {
+      setResult(resultString);
     }
   };
 

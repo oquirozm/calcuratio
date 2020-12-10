@@ -5,7 +5,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 600 Semi";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Semi.eot");
   src: url("/static/fonts/Jost-Semi.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Semi.woff2") format("woff2"),
@@ -16,7 +16,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 800";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-HeavyItalic.eot");
   src: url("/static/fonts/Jost-HeavyItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -28,7 +28,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 200 Hairline";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-HairlineItalic.eot");
   src: url("/static/fonts/Jost-HairlineItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -40,7 +40,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 300";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-LightItalic.eot");
   src: url("/static/fonts/Jost-LightItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -52,7 +52,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 400 Book";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Book.eot");
   src: url("/static/fonts/Jost-Book.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Book.woff2") format("woff2"),
@@ -63,7 +63,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 900";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-BlackItalic.eot");
   src: url("/static/fonts/Jost-BlackItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -75,7 +75,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 300";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Light.eot");
   src: url("/static/fonts/Jost-Light.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Light.woff2") format("woff2"),
@@ -86,7 +86,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 900";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Black.eot");
   src: url("/static/fonts/Jost-Black.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Black.woff2") format("woff2"),
@@ -97,7 +97,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 400 Book";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-BookItalic.eot");
   src: url("/static/fonts/Jost-BookItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -109,7 +109,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 700";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Bold.eot");
   src: url("/static/fonts/Jost-Bold.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Bold.woff2") format("woff2"),
@@ -120,7 +120,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 200";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-ThinItalic.eot");
   src: url("/static/fonts/Jost-ThinItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -132,7 +132,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 200";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Thin.eot");
   src: url("/static/fonts/Jost-Thin.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Thin.woff2") format("woff2"),
@@ -143,7 +143,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 800";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Heavy.eot");
   src: url("/static/fonts/Jost-Heavy.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Heavy.woff2") format("woff2"),
@@ -154,7 +154,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 100 Hairline";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Hairline.eot");
   src: url("/static/fonts/Jost-Hairline.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Hairline.woff2") format("woff2"),
@@ -165,7 +165,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 500";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-Medium.eot");
   src: url("/static/fonts/Jost-Medium.eot?#iefix") format("embedded-opentype"),
     url("/static/fonts/Jost-Medium.woff2") format("woff2"),
@@ -176,7 +176,7 @@
 }
 
 @font-face {
-  font-family: "Jost* 500";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-MediumItalic.eot");
   src: url("/static/fonts/Jost-MediumItalic.eot?#iefix")
       format("embedded-opentype"),
@@ -188,19 +188,19 @@
 }
 
 @font-face {
-  font-family: "Jost* 600 Semi";
+  font-family: "Jos";
   src: url("/static/fonts/Jost-SemiItalic.eot");
   src: url("/static/fonts/Jost-SemiItalic.eot?#iefix")
       format("embedded-opentype"),
     url("/static/fonts/Jost-SemiItalic.woff2") format("woff2"),
     url("/static/fonts/Jost-SemiItalic.woff") format("woff"),
     url("/static/fonts/Jost-SemiItalic.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
-  font-family: "Jost* 700";
+  font-family: "Jost*";
   src: url("/static/fonts/Jost-BoldItalic.eot");
   src: url("/static/fonts/Jost-BoldItalic.eot?#iefix")
       format("embedded-opentype"),

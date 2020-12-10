@@ -7,7 +7,8 @@ const Button = styled.button`
   height: 40px;
   background-color: #c63e4e;
   color: #fff;
-  font-family: "Jost* 300", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 300;
   border-radius: 100px;
   border: none;
   font-size: 20px;

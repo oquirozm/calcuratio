@@ -1,25 +1,80 @@
-// props: handleModeChange is a method passed from above that allows the component to change the mode of the app
-import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
+import { Flex } from "../components";
 
-/*
-|--------------------------------------------------------------------------
-| Other variables
-|--------------------------------------------------------------------------
-*/
-
-let cssVars = {
+const cssVars = {
   borderRadius: "1px",
   backgroundColor: "#938eed",
   hoverBackgroundColor: "#6979ba",
 };
 
-/*
-|--------------------------------------------------------------------------
-| Component
-|--------------------------------------------------------------------------
-*/
+const Button = styled.div`
+  display: block;
+  width: 160px;
+  margin: 0 20px;
+  padding: 10px;
+  height: auto;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "Jost*", sans-serif;
+  font-weight: 300;
+  background-color: #fff;
+  text-align: center;
 
-class ModeSelector extends React.Component {
+  &.active {
+    border-bottom: 1px solid #000;
+    font-weight: 700;
+  }
+  &:active, &:focus {
+    outline: none;
+  }
+`;
+
+const buttonsToRender = [
+  {
+    id: "get_width",
+    label: "get width"
+  },
+  {
+    id: "get_height",
+    label: "get height"
+  },
+  {
+    id: "get_aspect_ratio",
+    label: "get aspect ratio"
+  }
+];
+
+const ModeSelector = ({ handleModeUpdate, mode }) => {
+
+  console.log({ mode });
+
+  return (
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      my={4}
+      mx="auto"
+      width={[0, 0, 0, 600]}
+    >
+      {buttonsToRender.map((button) => (
+        <Button
+          className={mode === button.id ? "active" : ""}
+          id={button.id}
+          key={button.id}
+          onClick={handleModeUpdate}
+        >
+          {button.label}
+        </Button>
+      ))}
+    </Flex>
+  );
+};
+
+export default ModeSelector;
+
+{/* class ModeSelector extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -34,20 +89,6 @@ class ModeSelector extends React.Component {
   };
 
   render() {
-    let buttonsToRender = [
-      {
-        id: "get_width",
-        label: "get width",
-      },
-      {
-        id: "get_height",
-        label: "get height",
-      },
-      {
-        id: "get_aspect_ratio",
-        label: "get aspect ratio",
-      },
-    ];
 
     return (
       <div>
@@ -87,39 +128,10 @@ class ModeSelector extends React.Component {
               flex-direction: column;
             }
           }
-          button {
-            display: block;
-            width: 160px;
-            margin: 0 20px;
-            padding: 10px;
-            height: auto;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            font-family: "Jost* 300", sans-serif;
-            background-color: #fff;
-          }
-          @media (max-width: 599px) {
-            button {
-              margin: 10px 0;
-            }
-          }
-          button.active {
-            font-family: "Jost* 600 Semi", sans-serif;
-            border-bottom: ${cssVars.borderRadius} solid #000;
-          }
-          button:hover,
-          button:active,
-          button.active {
-            font-family: "Jost* 600 Semi", sans-serif;
-          }
-          button:focus,
-          button:active {
-            outline: none;
-          }
+
         `}</style>
       </div>
     );
   }
 }
-export default ModeSelector;
+export default ModeSelector; */}

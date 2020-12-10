@@ -6,7 +6,8 @@ import { prop } from "styled-tools";
 const Text = styled.span.attrs(({ type = "span" }) => ({
   as: type,
 }))`
-  font-family: "Jost* 600 Semi", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 600;
   font-size: ${prop("fontSize", "15")}px;
   letter-spacing: 0.5px;
   ${color}

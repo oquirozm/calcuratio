@@ -7,7 +7,7 @@ const Title = styled.span.attrs( ({type = "h1", ...props }) => ({
   as: type,
   ...props,
 }))`
-  font-family: "Jost* 400 Book", sans-serif;
+  font-family: "Jost*", sans-serif;
   font-size: ${prop("fontSize", "18")}px;
   letter-spacing: 0.5px;
   border-bottom: 2px solid black;

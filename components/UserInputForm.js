@@ -28,13 +28,15 @@ const FieldGroup = styled(Flex).attrs(props => ({
 }))``;
 
 const Label = styled.label`
-  font-family: "Jost* 500", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 500;
   font-size: 25px;
   text-align: center;
 `;
 
 const Paragraph = styled.p`
-  font-family: "Jost* 300", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 300;
   color: #6f6f6f;
   font-size: 16px;
   margin-bottom: 10px;
@@ -49,14 +51,16 @@ const Input = styled.input`
   border-radius: 1px;
   height: 30px;
   color: #000;
-  font-family: "Jost* 600 Semi", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 600;
   font-size: 25px;
   text-align: center;
 `;
 
 const Span = styled.span`
   font-size: 25px;
-  font-family: "Jost* 600 Semi", sans-serif;
+  font-family: "Jost*", sans-serif;
+  font-weight: 600;
 `;
 
 const GetWidthForm = ({ onChangeHandler }) => {
