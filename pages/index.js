@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Head from "next/head";
-import "../styles/global.css";
 import ModeSelector from "../components/ModeSelector";
 import UserInputForm from "../components/UserInputForm";
 import { Title, Text, Flex, Button } from "../components";

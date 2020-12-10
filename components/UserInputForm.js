@@ -135,12 +135,16 @@ const GetHeightForm = ({ onChangeHandler }) => {
         <Paragraph>(e.g. 4:3 or 16:9)</Paragraph>
         <div className="aspect-radio-input-group">
           <Input
+            width={80}
+            mx={2}
             type="text"
             name="xRatio"
             onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
           />
           <Span>:</Span>
           <Input
+            width={80}
+            mx={2}
             type="text"
             name="yRatio"
             onChange={(e) => onChangeHandler(e.target.name, e.target.value)}

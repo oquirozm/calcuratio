@@ -15,7 +15,7 @@ const Button = styled.div`
   padding: 10px;
   height: auto;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   font-family: "Jost*", sans-serif;
   font-weight: 300;
@@ -48,8 +48,6 @@ const buttonsToRender = [
 
 const ModeSelector = ({ handleModeUpdate, mode }) => {
 
-  console.log({ mode });
-
   return (
     <Flex
       justifyContent="center"
@@ -63,7 +61,7 @@ const ModeSelector = ({ handleModeUpdate, mode }) => {
           className={mode === button.id ? "active" : ""}
           id={button.id}
           key={button.id}
-          onClick={handleModeUpdate}
+          onClick={() => handleModeUpdate(button.id)}
         >
           {button.label}
         </Button>
@@ -73,65 +71,3 @@ const ModeSelector = ({ handleModeUpdate, mode }) => {
 };
 
 export default ModeSelector;
-
-{/* class ModeSelector extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  static propTypes = {
-    handleModeUpdate: PropTypes.func.isRequired,
-    mode: PropTypes.oneOf(["get_width", "get_height", "get_aspect_ratio"]),
-  };
-
-  handleButtonClick = e => {
-    this.props.handleModeUpdate(e.target.id);
-  };
-
-  render() {
-
-    return (
-      <div>
-        <div className="button_group">
-          {buttonsToRender.map(button => (
-            <button
-              className={this.props.mode === button.id ? "active" : ""}
-              id={button.id}
-              key={button.id}
-              onClick={this.handleButtonClick}>
-              {button.label}
-            </button>
-          ))}
-        </div>
-
-        <style jsx>{`
-          .button_group {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto;
-          }
-          @media (min-width: 1200px) {
-            .button_group {
-              width: 600px;
-            }
-          }
-          @media (min-width: 600px) and (max-width: 1199px) {
-            .button_group {
-              width: 70%;
-            }
-          }
-          @media (max-width: 599px) {
-            .button_group {
-              width: 100%;
-              flex-direction: column;
-            }
-          }
-
-        `}</style>
-      </div>
-    );
-  }
-}
-export default ModeSelector; */}

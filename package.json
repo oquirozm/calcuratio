@@ -11,10 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "next": "^7.0.2",
-    "node-sass": "^4.10.0",
-    "prop-types": "^15.6.2",
+    "next": "^10.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1",
