@@ -1,9 +1,9 @@
 import { Component, forwardRef, createRef } from "react";
 import styled from "styled-components";
-import { Flex } from "../components";
 import { space, layout } from "styled-system";
+import { Flex } from ".";
 
-const FormArea = styled(Flex).attrs( props => ({
+const FormArea = styled(Flex).attrs((props) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
@@ -11,7 +11,7 @@ const FormArea = styled(Flex).attrs( props => ({
   pb: 3,
   px: 3,
   mt: 0,
-  mx: "auto"
+  mx: "auto",
 }))`
   width: 100%;
   max-width: 600px;
@@ -19,12 +19,12 @@ const FormArea = styled(Flex).attrs( props => ({
   border-radius: 25px;
 `;
 
-const FieldGroup = styled(Flex).attrs(props => ({
+const FieldGroup = styled(Flex).attrs((props) => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   mt: 3,
-  ...props
+  ...props,
 }))``;
 
 const Label = styled.label`
@@ -64,7 +64,6 @@ const Span = styled.span`
 `;
 
 const GetWidthForm = ({ onChangeHandler }) => {
-
   return (
     <FormArea>
       <FieldGroup>
@@ -110,7 +109,6 @@ const GetWidthForm = ({ onChangeHandler }) => {
 };
 
 const GetHeightForm = ({ onChangeHandler }) => {
-
   return (
     <FormArea>
       <FieldGroup>
@@ -156,7 +154,6 @@ const GetHeightForm = ({ onChangeHandler }) => {
 };
 
 const GetAspectRatioForm = ({ onChangeHandler }) => {
-
   return (
     <FormArea>
       <FieldGroup>
@@ -168,9 +165,7 @@ const GetAspectRatioForm = ({ onChangeHandler }) => {
           width={150}
           type="text"
           name="width"
-          onChange={(e) =>
-            onChangeHandler(e.target.name, e.target.value)
-          }
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         />
       </FieldGroup>
       <FieldGroup>
@@ -182,9 +177,7 @@ const GetAspectRatioForm = ({ onChangeHandler }) => {
           width={150}
           type="text"
           name="height"
-          onChange={(e) =>
-            onChangeHandler(e.target.name, e.target.value)
-          }
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         />
       </FieldGroup>
     </FormArea>
@@ -192,25 +185,16 @@ const GetAspectRatioForm = ({ onChangeHandler }) => {
 };
 
 const UserInputForm = ({ mode, updateGlobalUserInputs }) => {
-
-   switch (mode) {
-     case "get_width":
-       return (
-         <GetWidthForm onChangeHandler={updateGlobalUserInputs} />
-       );
-     case "get_height":
-       return (
-         <GetHeightForm onChangeHandler={updateGlobalUserInputs} />
-       );
-     case "get_aspect_ratio":
-       return (
-         <GetAspectRatioForm
-           onChangeHandler={updateGlobalUserInputs}
-         />
-       );
-     default:
-       return null;
-   }
-}
+  switch (mode) {
+    case "get_width":
+      return <GetWidthForm onChangeHandler={updateGlobalUserInputs} />;
+    case "get_height":
+      return <GetHeightForm onChangeHandler={updateGlobalUserInputs} />;
+    case "get_aspect_ratio":
+      return <GetAspectRatioForm onChangeHandler={updateGlobalUserInputs} />;
+    default:
+      return null;
+  }
+};
 
 export default UserInputForm;

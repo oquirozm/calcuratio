@@ -1,12 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
-import { Flex } from "../components";
-
-const cssVars = {
-  borderRadius: "1px",
-  backgroundColor: "#938eed",
-  hoverBackgroundColor: "#6979ba",
-};
+import { Flex } from ".";
 
 const Button = styled.div`
   display: block;
@@ -46,7 +40,12 @@ const buttonsToRender = [
   }
 ];
 
-const ModeSelector = ({ handleModeUpdate, mode }) => {
+interface IModeSelector {
+  handleModeUpdate?: (id: string) => void;
+  mode?: string;
+}
+
+const ModeSelector: FC<IModeSelector> = ({ handleModeUpdate, mode }) => {
 
   return (
     <Flex

@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import { space } from "styled-system";
+import { space, SpaceProps } from "styled-system";
 
-const Button = styled.button`
+const Button = styled.button<SpaceProps>`
   width: 180px;
   height: 40px;
   background-color: #c63e4e;
