@@ -1,7 +1,6 @@
-import { Component, forwardRef, createRef } from "react";
 import styled from "styled-components";
-import { space, layout } from "styled-system";
-import { Flex } from ".";
+import { space, layout, SpaceProps, LayoutProps } from "styled-system";
+import { Flex } from "components";
 
 const FormArea = styled(Flex).attrs((props) => ({
   flexDirection: "column",
@@ -43,7 +42,7 @@ const Paragraph = styled.p`
   text-align: center;
 `;
 
-const Input = styled.input`
+const Input = styled.input<SpaceProps & LayoutProps>`
   ${space}
   ${layout}
   background-color: #fff;
@@ -55,6 +54,11 @@ const Input = styled.input`
   font-weight: 600;
   font-size: 25px;
   text-align: center;
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const Span = styled.span`
@@ -63,7 +67,11 @@ const Span = styled.span`
   font-weight: 600;
 `;
 
-const GetWidthForm = ({ onChangeHandler }) => {
+export const WidthForm = ({
+  onHeightChange,
+  onRatioXChange,
+  onRatioYChange,
+}) => {
   return (
     <FormArea>
       <FieldGroup>
@@ -72,10 +80,12 @@ const GetWidthForm = ({ onChangeHandler }) => {
           (in whatever measure unit, we’re talking proportions here)
         </Paragraph>
         <Input
-          width={150}
-          type="text"
           name="height"
-          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+          width={150}
+          type="number"
+          pattern="[0-9]*"
+          inputMode="numeric"
+          onChange={(e) => onHeightChange(e.target.value)}
         />
       </FieldGroup>
       <Flex
@@ -90,17 +100,21 @@ const GetWidthForm = ({ onChangeHandler }) => {
           <Input
             width={80}
             mx={2}
-            type="text"
+            type="number"
+            pattern="[0-9]*"
+            inputMode="numeric"
             name="xRatio"
-            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+            onChange={(e) => onRatioXChange(e.target.value)}
           />
           <Span>:</Span>
           <Input
             width={80}
             mx={2}
-            type="text"
+            type="number"
+            pattern="[0-9]*"
+            inputMode="numeric"
             name="yRatio"
-            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+            onChange={(e) => onRatioYChange(e.target.value)}
           />
         </div>
       </Flex>
@@ -108,7 +122,11 @@ const GetWidthForm = ({ onChangeHandler }) => {
   );
 };
 
-const GetHeightForm = ({ onChangeHandler }) => {
+export const HeightForm = ({
+  onWidthChange,
+  onRatioYChange,
+  onRatioXChange,
+}) => {
   return (
     <FormArea>
       <FieldGroup>
@@ -118,9 +136,11 @@ const GetHeightForm = ({ onChangeHandler }) => {
         </Paragraph>
         <Input
           width={150}
-          type="text"
+          type="number"
+          pattern="[0-9]*"
+          inputMode="numeric"
           name="width"
-          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+          onChange={(e) => onWidthChange(e.target.value)}
         />
       </FieldGroup>
       <Flex
@@ -135,17 +155,21 @@ const GetHeightForm = ({ onChangeHandler }) => {
           <Input
             width={80}
             mx={2}
-            type="text"
+            type="number"
+            pattern="[0-9]*"
+            inputMode="numeric"
             name="xRatio"
-            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+            onChange={(e) => onRatioXChange(e.target.value)}
           />
           <Span>:</Span>
           <Input
             width={80}
             mx={2}
-            type="text"
+            type="number"
+            pattern="[0-9]*"
+            inputMode="numeric"
             name="yRatio"
-            onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+            onChange={(e) => onRatioYChange(e.target.value)}
           />
         </div>
       </Flex>
@@ -153,7 +177,11 @@ const GetHeightForm = ({ onChangeHandler }) => {
   );
 };
 
-const GetAspectRatioForm = ({ onChangeHandler }) => {
+export const AspectRatioForm = ({
+  onWidthChange,
+  onHeightChange,
+  onEnterKey,
+}) => {
   return (
     <FormArea>
       <FieldGroup>
@@ -163,9 +191,12 @@ const GetAspectRatioForm = ({ onChangeHandler }) => {
         </Paragraph>
         <Input
           width={150}
-          type="text"
+          type="number"
+          pattern="[0-9]*"
+          inputMode="numeric"
           name="width"
-          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+          onChange={(e) => onWidthChange(e.target.value)}
+          onKeyPress={onEnterKey}
         />
       </FieldGroup>
       <FieldGroup>
@@ -175,26 +206,14 @@ const GetAspectRatioForm = ({ onChangeHandler }) => {
         </Paragraph>
         <Input
           width={150}
-          type="text"
+          type="number"
+          pattern="[0-9]*"
+          inputMode="numeric"
           name="height"
-          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
+          onChange={(e) => onHeightChange(e.target.value)}
+          onKeyPress={onEnterKey}
         />
       </FieldGroup>
     </FormArea>
   );
 };
-
-const UserInputForm = ({ mode, updateGlobalUserInputs }) => {
-  switch (mode) {
-    case "get_width":
-      return <GetWidthForm onChangeHandler={updateGlobalUserInputs} />;
-    case "get_height":
-      return <GetHeightForm onChangeHandler={updateGlobalUserInputs} />;
-    case "get_aspect_ratio":
-      return <GetAspectRatioForm onChangeHandler={updateGlobalUserInputs} />;
-    default:
-      return null;
-  }
-};
-
-export default UserInputForm;

@@ -15,7 +15,7 @@ interface IFlexProps {
 const Flex = styled.div.attrs<IFlexProps>(({ type = "div", ...props }) => ({
   as: type,
   ...props,
-}))<LayoutProps & SpaceProps & FlexboxProps>`
+}))<LayoutProps & SpaceProps & FlexboxProps & IFlexProps>`
   display: flex;
   ${layout}
   ${space}

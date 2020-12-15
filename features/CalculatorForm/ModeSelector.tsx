@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Flex } from ".";
+import { Flex } from "components";
 
 const Button = styled.div`
   display: block;
@@ -20,33 +20,33 @@ const Button = styled.div`
     border-bottom: 1px solid #000;
     font-weight: 700;
   }
-  &:active, &:focus {
+  &:active,
+  &:focus {
     outline: none;
   }
 `;
 
 const buttonsToRender = [
   {
+    id: "get_aspect_ratio",
+    label: "get aspect ratio",
+  },
+  {
     id: "get_width",
-    label: "get width"
+    label: "get width",
   },
   {
     id: "get_height",
-    label: "get height"
+    label: "get height",
   },
-  {
-    id: "get_aspect_ratio",
-    label: "get aspect ratio"
-  }
 ];
 
 interface IModeSelector {
-  handleModeUpdate?: (id: string) => void;
+  handleModeChange?: (id: string) => void;
   mode?: string;
 }
 
-const ModeSelector: FC<IModeSelector> = ({ handleModeUpdate, mode }) => {
-
+const ModeSelector: FC<IModeSelector> = ({ handleModeChange, mode }) => {
   return (
     <Flex
       justifyContent="center"
@@ -60,7 +60,7 @@ const ModeSelector: FC<IModeSelector> = ({ handleModeUpdate, mode }) => {
           className={mode === button.id ? "active" : ""}
           id={button.id}
           key={button.id}
-          onClick={() => handleModeUpdate(button.id)}
+          onClick={() => handleModeChange(button.id)}
         >
           {button.label}
         </Button>
