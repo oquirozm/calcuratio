@@ -1,6 +1,6 @@
 import { AspectRatio, Dimensions } from "@types";
 import { Button, Flex } from "components";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { calculateAspectRatio, calculateHeight, calculateWidth } from "utils";
 import { AspectRatioForm, HeightForm, WidthForm } from "./Forms";
 import ModeSelector from "./ModeSelector";
@@ -16,10 +16,10 @@ const CalculatorForm: FC<ICalculatorForm> = ({
 }) => {
   const [mode, setMode] = useState<string>("get_aspect_ratio");
   const [dimensions, setDimensions] = useState<Dimensions>({
-    width: 1,
-    height: 1,
+    width: null,
+    height: null,
   });
-  const [ratios, setRatios] = useState<AspectRatio>({ x: 1, y: 1 });
+  const [ratios, setRatios] = useState<AspectRatio>({ x: null, y: null });
 
   // Clean up the result on mode change.
   useEffect(() => {
@@ -47,23 +47,40 @@ const CalculatorForm: FC<ICalculatorForm> = ({
     }
   };
 
+  const isButtonDisabled = (mode: string): boolean => {
+    if (mode === "get_width")
+      return (
+        ratios?.x === null || ratios?.y === null || dimensions?.height === null
+      );
+
+    if (mode === "get_height")
+      return (
+        ratios?.x === null || ratios?.y === null || dimensions?.width === null
+      );
+
+    if (mode === "get_aspect_ratio")
+      return dimensions?.width === null || dimensions?.height === null;
+
+    return false;
+  };
+
   const calculate = (mode: string): void => {
     let result = "";
 
     if (mode === "get_width") {
       const width: number = calculateWidth({
-        xRatio: ratios.x,
-        yRatio: ratios.y,
-        height: dimensions.height,
+        xRatio: ratios.x ?? 1,
+        yRatio: ratios.y ?? 1,
+        height: dimensions.height ?? 1,
       });
       result = `${width}`;
     }
 
     if (mode === "get_height") {
       const height: number = calculateHeight({
-        xRatio: ratios.x,
-        yRatio: ratios.y,
-        width: dimensions.width,
+        xRatio: ratios.x ?? 1,
+        yRatio: ratios.y ?? 1,
+        width: dimensions.width ?? 1,
       });
       result = `${height}`;
     }
@@ -102,7 +119,12 @@ const CalculatorForm: FC<ICalculatorForm> = ({
           onRatioYChange={onRatioYChange}
         />
       )}
-      <Button className="calculate" my={4} onClick={(e) => calculate(mode)}>
+      <Button
+        className="calculate"
+        my={4}
+        onClick={(e) => calculate(mode)}
+        disabled={isButtonDisabled(mode)}
+      >
         calculate
       </Button>
     </Flex>
